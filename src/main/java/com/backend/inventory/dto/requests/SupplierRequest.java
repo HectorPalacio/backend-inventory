@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -22,6 +20,4 @@ public class SupplierRequest {
     @NotNull(message = "El lugar de origen es requerido")
     private String originPlace;
     private boolean status;
-    private LocalDate bindingDate;
-    private LocalDate terminationDate;
 }
