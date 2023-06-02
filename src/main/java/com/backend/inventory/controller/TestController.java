@@ -10,6 +10,7 @@ public class TestController {
 	
 	@GetMapping()
     public String extraBenefit() throws Exception {
-        return "Sí hay comunicación";
+        System.out.println(org.hibernate.Version.getVersionString());
+        return org.hibernate.Version.getVersionString();
     }
 }

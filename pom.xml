@@ -74,6 +74,14 @@
 			<scope>provided</scope>
 		</dependency>
 
+
+		<!-- Manual dependencies -->
+		<!-- https://mvnrepository.com/artifact/com.vladmihalcea/hibernate-types-60 -->
+		<dependency>
+			<groupId>com.vladmihalcea</groupId>
+			<artifactId>hibernate-types-60</artifactId>
+			<version>2.21.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
