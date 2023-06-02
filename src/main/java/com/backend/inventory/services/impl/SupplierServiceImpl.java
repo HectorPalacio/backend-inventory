@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,23 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public SupplierResponse save(SupplierRequest supplierRequest) {
         Supplier supplier = supplierRepository.save(this.convertToEntity(supplierRequest));
+        supplier.setBindingDate(LocalDate.now());
         return this.convertToResponse(supplier);
+    }
+
+    @Override
+    public SupplierResponse update(long id, SupplierRequest supplierRequest) {
+        Supplier supplier = convertToEntity(supplierRequest);
+        supplier.setId(id);
+        return convertToResponse(supplierRepository.save(supplier));
+    }
+
+    @Override
+    public SupplierResponse deleteById(long supplierId) {
+        Supplier supplier = supplierRepository.findById(supplierId).orElseThrow();
+        supplier.setStatus(false);
+        supplier.setTerminationDate(LocalDate.now());
+        return this.convertToResponse(supplierRepository.save(supplier));
     }
 
     private SupplierResponse convertToResponse(Supplier supplier){

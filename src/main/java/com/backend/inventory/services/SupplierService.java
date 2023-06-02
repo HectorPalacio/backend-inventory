@@ -11,4 +11,6 @@ public interface SupplierService {
     List<SupplierResponse> findAll(Pageable pageable);
     Optional<SupplierResponse> findById(long id);
     SupplierResponse save(SupplierRequest supplierRequest);
+    SupplierResponse update(long id, SupplierRequest supplierRequest);
+    SupplierResponse deleteById(long supplierId);
 }

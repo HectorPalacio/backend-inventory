@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,17 +36,36 @@ public class SupplierController {
         return ResponseEntity.ok(supplierResponses);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Optional<SupplierResponse>> findAll(
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<SupplierResponse>> findById(
             @PathVariable("id") long id
     ) {
         return ResponseEntity.ok(supplierService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<SupplierResponse> findAll(
+    public ResponseEntity<SupplierResponse> save(
             @Valid @RequestBody SupplierRequest supplierRequest
         ) {
         return ResponseEntity.ok(supplierService.save(supplierRequest));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SupplierResponse> update(
+            @PathVariable("id") int id,
+            @Valid @RequestBody SupplierRequest supplierRequest
+        ) {
+        if (supplierService.findById(id).isEmpty())
+            return ResponseEntity.badRequest().body(null);
+        return ResponseEntity.ok(supplierService.update(id, supplierRequest));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<SupplierResponse> delete(
+            @PathVariable("id") int id
+        ) {
+        if (supplierService.findById(id).isEmpty())
+            return ResponseEntity.badRequest().body(null);
+        return ResponseEntity.ok(supplierService.deleteById(id));
     }
 }
