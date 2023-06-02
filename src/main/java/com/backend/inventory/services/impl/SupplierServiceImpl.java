@@ -27,8 +27,8 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public List<SupplierResponse> findAll(Pageable pageable) {
-        return supplierRepository.findAll(pageable).getContent().stream().map(this::convertToResponse).toList();
+    public List<SupplierResponse> findAll(boolean status, Pageable pageable) {
+        return supplierRepository.findAllByStatus(status, pageable).getContent().stream().map(this::convertToResponse).toList();
     }
 
     @Override

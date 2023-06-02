@@ -26,10 +26,11 @@ public class SupplierController {
     @GetMapping
     public ResponseEntity<List<SupplierResponse>> findAll(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "true") boolean status
     ) {
         Pageable paging = PageRequest.of(page, size);
-        List<SupplierResponse> supplierResponses = supplierService.findAll(paging);
+        List<SupplierResponse> supplierResponses = supplierService.findAll(status, paging);
         if (supplierResponses.isEmpty())
             return ResponseEntity.accepted().body(supplierResponses);
 

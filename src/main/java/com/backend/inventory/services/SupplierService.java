@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SupplierService {
-    List<SupplierResponse> findAll(Pageable pageable);
+    List<SupplierResponse> findAll(boolean status, Pageable pageable);
     Optional<SupplierResponse> findById(long id);
     SupplierResponse save(SupplierRequest supplierRequest);
     SupplierResponse update(long id, SupplierRequest supplierRequest);
