@@ -1,4 +1,4 @@
-//package com.backend.inventory.config;
+package com.backend.inventory.config;//package com.backend.inventory.config;
 //
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;

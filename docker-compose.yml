@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  backend-inventory:
+    container_name: backend-inventory
+    image: backend-inventory
+    build: .
+    restart: always
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - postgres-inventory
+    networks:
+      - fruitvalle
+    environment:
+      PORT: ${PORT}
+      JDBC_URL: ${JDBC_URL}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+  postgres-inventory:
+    container_name: postgres-inventory
+    image: postgres:14.4-alpine
+    volumes:
+      - ${DB_VOLUME_DIR}:/var/lib/postgresql/
+    restart: always
+    networks:
+      - fruitvalle
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+
+networks:
+  fruitvalle:
+    external: true

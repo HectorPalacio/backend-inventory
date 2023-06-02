@@ -1,5 +1,6 @@
 package com.backend.inventory.controller;
 
+
 import com.backend.inventory.dto.requests.SupplierRequest;
 import com.backend.inventory.dto.responses.SupplierResponse;
 import com.backend.inventory.services.SupplierService;
@@ -7,7 +8,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +25,8 @@ public class SupplierController {
 
     @GetMapping
     public ResponseEntity<List<SupplierResponse>> findAll(
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "20") int size
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
     ) {
         Pageable paging = PageRequest.of(page, size);
         List<SupplierResponse> supplierResponses = supplierService.findAll(paging);
@@ -46,7 +46,7 @@ public class SupplierController {
     @PostMapping
     public ResponseEntity<SupplierResponse> save(
             @Valid @RequestBody SupplierRequest supplierRequest
-        ) {
+    ) {
         return ResponseEntity.ok(supplierService.save(supplierRequest));
     }
 
@@ -54,7 +54,7 @@ public class SupplierController {
     public ResponseEntity<SupplierResponse> update(
             @PathVariable("id") int id,
             @Valid @RequestBody SupplierRequest supplierRequest
-        ) {
+    ) {
         if (supplierService.findById(id).isEmpty())
             return ResponseEntity.badRequest().body(null);
         return ResponseEntity.ok(supplierService.update(id, supplierRequest));
@@ -63,7 +63,7 @@ public class SupplierController {
     @DeleteMapping("/{id}")
     public ResponseEntity<SupplierResponse> delete(
             @PathVariable("id") int id
-        ) {
+    ) {
         if (supplierService.findById(id).isEmpty())
             return ResponseEntity.badRequest().body(null);
         return ResponseEntity.ok(supplierService.deleteById(id));
