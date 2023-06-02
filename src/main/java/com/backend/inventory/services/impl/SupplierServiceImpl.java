@@ -38,9 +38,11 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public SupplierResponse save(SupplierRequest supplierRequest) {
-        Supplier supplier = supplierRepository.save(this.convertToEntity(supplierRequest));
+        Supplier supplier = this.convertToEntity(supplierRequest);
+        supplier.setStatus(true);
         supplier.setBindingDate(LocalDate.now());
-        return this.convertToResponse(supplier);
+        Supplier supplierResponse = supplierRepository.save(supplier);
+        return this.convertToResponse(supplierResponse);
     }
 
     @Override
